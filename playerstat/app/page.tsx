@@ -6,10 +6,12 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 interface GameProp {
+  id: string;
   name: string;
   visits: number;
   players: number;
   favorites: number;
+  image: string;
 }
 export default function Home() {
   const [games, setGames] = useState<GameProp[]>([])
@@ -40,11 +42,13 @@ return (
   games.map((game:any) => (
 
           <GameProp
-      key = {game.name}
+      key = {game.id}
+      id={game.id}
       name={game.name}
       visits={game.visits}
       players={game.players}
       favorites={game.favorites}
+      image={game.image}
     />
   ))
 }

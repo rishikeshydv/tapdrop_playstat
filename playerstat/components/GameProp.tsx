@@ -1,16 +1,18 @@
 import { Card } from "@/components/ui/card"
 interface GamePropItems{
+  id: string;
   name: string;
   visits: number;
   players: number;
   favorites: number;
+  image: string;
 }
-const GameProp:React.FC<GamePropItems> = ({name,visits,players,favorites}) => {
+const GameProp:React.FC<GamePropItems> = ({id,name,visits,players,favorites,image}) => {
   return (
     <Card className="w-full max-w-sm p-6 grid gap-6">
       <div className="relative overflow-hidden rounded-lg">
         <img
-          src="/placeholder.svg"
+          src={image}
           alt="Game thumbnail"
           width={600}
           height={400}
