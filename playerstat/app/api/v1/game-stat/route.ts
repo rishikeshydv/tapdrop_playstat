@@ -18,6 +18,11 @@ export async function GET(req:NextRequest){
         }
         games.push(gameInfo)
     }
+
+    //order the games list in ascending order of "players"
+    games.sort((a,b) => a.players - b.players)
+    
+
     //Get game image for each game
     //link: https://thumbnails.roblox.com/v1/games/multiget/thumbnails?universeIds=${universeId}&size=768x432&format=Png&isCircular=false
     for (const game of games){

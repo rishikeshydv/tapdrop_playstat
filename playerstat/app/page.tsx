@@ -33,6 +33,7 @@ export default function Home() {
     setTotalPlayers(players)
     setTotalVisits(visits)
   }, [games])
+  
 
 return (
 <div>
