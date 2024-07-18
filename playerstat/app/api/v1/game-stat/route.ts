@@ -2,7 +2,7 @@ import axios from 'axios';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(req:NextRequest){
-    const universeIds = ["3991674697","5107841430","5773880372","5644087344","5777122777","5469100421","5337048999"]
+    const universeIds = ["3991674697","5107841430","5186418034","5644087344","5777122777","5469100421","5337048999"]
     const games = []
     // Get game data for each universe
     for (const universeId of universeIds){
