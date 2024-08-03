@@ -1,9 +1,10 @@
 import axios from 'axios';
 import { NextRequest, NextResponse } from 'next/server';
 
-export async function GET(req:NextRequest){
+export async function GET(){
     const universeIds = ["3991674697","5107841430","5186418034","5644087344","5777122777","5469100421","5337048999","5704018616"]
     const games = []
+
     // Get game data for each universe
     for (const universeId of universeIds){
         const response = await axios.get(`https://games.roblox.com/v1/games?universeIds=${universeId}`)
