@@ -17,11 +17,22 @@ export default function Home() {
   const [games, setGames] = useState<GameProp[]>([])
   const [totalPlayers, setTotalPlayers] = useState(0)
   const [totalVisits, setTotalVisits] = useState(0)
+
+  const fetchGameStats = async () => {
+    try {
+      const response = await axios.get('/api/v1/game-stat', {
+        headers: {
+          'Cache-Control': 'no-cache' // Ensure no caching happens
+        }
+      });
+      setGames(response.data);
+    } catch (error) {
+      console.error('Error fetching game stats:', error);
+    }
+  };
   
   useEffect(() => {
-    axios.get('/api/v1/game-stat').then((response) => {
-      setGames(response.data)
-    })
+    fetchGameStats();
   }, [])
 
   useEffect(() => {
