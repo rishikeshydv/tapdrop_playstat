@@ -1,5 +1,6 @@
 "use client"
-export const fetchCache = 'force-no-store';
+export const fetchCache = 'force-no-store'
+export const dynamic = 'force-dynamic'
 import GameProp from "@/components/GameProp";
 import Header from "@/components/Header";
 import axios from "axios";
