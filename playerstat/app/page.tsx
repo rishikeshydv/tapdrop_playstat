@@ -3,7 +3,6 @@
 import GameProp from "@/components/GameProp";
 import Header from "@/components/Header";
 import axios from "axios";
-import { get } from "http";
 import { useEffect, useState } from "react";
 
 interface GameProp {
@@ -18,15 +17,11 @@ export default function Home() {
   const [games, setGames] = useState<GameProp[]>([])
   const [totalPlayers, setTotalPlayers] = useState(0)
   const [totalVisits, setTotalVisits] = useState(0)
-  async function getGames() {
-    const response = await axios.get('/api/v1/game-stat')
-    setGames(response.data)
-  }
-
+  
   useEffect(() => {
-    getGames()
-    const intervalId = setInterval(getGames, 5000);
-    return () => clearInterval(intervalId)
+    axios.get('/api/v1/game-stat').then((response) => {
+      setGames(response.data)
+    })
   }, [])
 
   useEffect(() => {
