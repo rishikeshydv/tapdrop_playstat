@@ -21,14 +21,12 @@ export default function Home() {
 
   const fetchGameStats = async () => {
     try {
-      const response = await axios.get('/api/v1/game-stat', {
-        headers: {
-          'Cache-Control': 'no-cache',
-          'Pragma': 'no-cache',
-          'Expires': '0',
-        },
+      const response = await fetch('/api/v1/game-stat', {
+        cache: 'no-cache',
+        method: 'GET',
       });
-      setGames(response.data);
+      const responseJson = await response.json();
+      setGames(responseJson);
     } catch (error) {
       console.error('Error fetching game stats:', error);
     }

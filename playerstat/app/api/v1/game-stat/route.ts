@@ -1,6 +1,6 @@
-import axios from 'axios';
 import { NextResponse } from 'next/server';
-
+export const fetchCache = 'force-no-store'
+export const dynamic = 'force-dynamic'
 interface Game {
   id: string;
   name: string;
@@ -16,18 +16,15 @@ export async function GET() {
   try {
     console.log('Fetching game data');
     const gameDataPromises = universeIds.map(universeId =>
-      axios.get(`https://games.roblox.com/v1/games?universeIds=${universeId}`, {
-        headers: {
-            'Cache-Control': 'no-cache',
-            'Pragma': 'no-cache',
-            'Expires': '0',
-        }
-      })
+      fetch(`https://games.roblox.com/v1/games?universeIds=${universeId}`, {
+        cache: 'no-cache',
+        method: 'GET',
+      }).then(response => response.json())
     );
 
     const gameDataResponses = await Promise.all(gameDataPromises);
     const games: Game[] = gameDataResponses.map((response, index) => {
-      const gameData = response.data.data[0];
+      const gameData = response.data[0];
       console.log(`Fetched data for universeId ${universeIds[index]}: `, gameData);
       return {
         id: universeIds[index],
@@ -45,18 +42,14 @@ export async function GET() {
     // Fetch game images in parallel
     console.log('Fetching game images');
     const imagePromises = games.map(game =>
-      axios.get(`https://thumbnails.roblox.com/v1/games/multiget/thumbnails?universeIds=${game.id}&size=768x432&format=Png&isCircular=false`, {
-        headers: {
-            'Cache-Control': 'no-cache',
-            'Pragma': 'no-cache',
-            'Expires': '0',
-        }
-      })
+      fetch(`https://thumbnails.roblox.com/v1/games/multiget/thumbnails?universeIds=${game.id}&size=768x432&format=Png&isCircular=false`, {
+        cache: 'no-cache'
+      }).then(response => response.json())
     );
 
     const imageResponses = await Promise.all(imagePromises);
     imageResponses.forEach((response, index) => {
-      games[index].image = response.data.data[0].thumbnails[0].imageUrl;
+      games[index].image = response.data[0].thumbnails[0].imageUrl;
       console.log(`Fetched image for game ${games[index].id}`);
     });
 
