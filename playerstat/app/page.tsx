@@ -25,7 +25,7 @@ export default function Home() {
 
   useEffect(() => {
     getGames()
-    const intervalId = setInterval(getGames, 5*60*1000);
+    const intervalId = setInterval(getGames, 5000);
     return () => clearInterval(intervalId)
   }, [])
 
