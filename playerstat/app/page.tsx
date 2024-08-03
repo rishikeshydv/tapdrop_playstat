@@ -1,5 +1,5 @@
 "use client"
-
+export const fetchCache = 'force-no-store';
 import GameProp from "@/components/GameProp";
 import Header from "@/components/Header";
 import axios from "axios";
@@ -23,7 +23,7 @@ export default function Home() {
       const response = await axios.get('/api/v1/game-stat', {
         headers: {
           'Cache-Control': 'no-cache' // Ensure no caching happens
-        }
+        },
       });
       setGames(response.data);
     } catch (error) {
