@@ -23,7 +23,9 @@ export default function Home() {
     try {
       const response = await axios.get('/api/v1/game-stat', {
         headers: {
-          'Cache-Control': 'no-cache' // Ensure no caching happens
+          'Cache-Control': 'no-cache',
+          'Pragma': 'no-cache',
+          'Expires': '0',
         },
       });
       setGames(response.data);

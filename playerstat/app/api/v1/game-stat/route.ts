@@ -18,7 +18,9 @@ export async function GET() {
     const gameDataPromises = universeIds.map(universeId =>
       axios.get(`https://games.roblox.com/v1/games?universeIds=${universeId}`, {
         headers: {
-          'Cache-Control': 'no-cache'
+            'Cache-Control': 'no-cache',
+            'Pragma': 'no-cache',
+            'Expires': '0',
         }
       })
     );
@@ -45,7 +47,9 @@ export async function GET() {
     const imagePromises = games.map(game =>
       axios.get(`https://thumbnails.roblox.com/v1/games/multiget/thumbnails?universeIds=${game.id}&size=768x432&format=Png&isCircular=false`, {
         headers: {
-          'Cache-Control': 'no-cache'
+            'Cache-Control': 'no-cache',
+            'Pragma': 'no-cache',
+            'Expires': '0',
         }
       })
     );
